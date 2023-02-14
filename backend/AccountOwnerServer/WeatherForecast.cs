@@ -1,4 +1,4 @@
-namespace AccountOwneServer;
+namespace AccountOwnerServer;
 
 public class WeatherForecast
 {
