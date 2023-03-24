@@ -1,3 +1,4 @@
+using Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccountOwnerServer.Controllers;
@@ -6,27 +7,24 @@ namespace AccountOwnerServer.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
+    private readonlyILoggerManager _logger;
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILoggerManager logger)
     {
         _logger = logger;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpGet]
+    public IEnumerable<string> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateTime.Now.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+        _logger.LogInfo("Testado um log de informação a partir de um Contoller.");
+        _logger.LogDebug("Testado um log de debug a partir de um Controller.");
+        _logger.LogWarn("Testado um log de aviso a partir de um Controller.");
+        _logger.LogError("Testado um log de erro a partir de um Controller.");
+        return new string[] { "value1", "value2" };
     }
 }

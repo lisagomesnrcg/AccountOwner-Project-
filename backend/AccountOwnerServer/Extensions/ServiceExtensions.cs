@@ -1,3 +1,7 @@
+using Cntracts;
+using LoggerSerevice;
+
+
 namespace AccountOwnerServer.Extensions
 {
     public static class ServiceExtensions
@@ -17,10 +21,7 @@ namespace AccountOwnerServer.Extensions
 
         public static void configureIISIntegration(this IServiceCollection services)
         {
-            services.Configure<IISOptions>(options => {
-                
-            });
-
+            services.AddSingleton<ILoggerManager,LoggerManager>();
         }
     }
 }
