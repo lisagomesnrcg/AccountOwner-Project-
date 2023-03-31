@@ -7,7 +7,7 @@ namespace AccountOwnerServer.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    private readonlyILoggerManager _logger;
+    private readonly ILoggerManager _logger;
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"

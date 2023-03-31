@@ -1,6 +1,5 @@
-using Cntracts;
-using LoggerSerevice;
-
+using Contracts;
+using LoggerSevice;
 
 namespace AccountOwnerServer.Extensions
 {
@@ -21,7 +20,21 @@ namespace AccountOwnerServer.Extensions
 
         public static void configureIISIntegration(this IServiceCollection services)
         {
-            services.AddSingleton<ILoggerManager,LoggerManager>();
+            services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+
+        public static void ConfigureLoggerService(this IServiceCollection services)
+        {
+            services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+
+        public static void ConfigureMySqlContext(this IServiceCollection Services, IConfiguration config)
+        {
+            var connectionString = config["mysqlconnection:connectionString"];
+            var serverVersion = ServerVersion.AutoDetect(connectionString);
+            Services.AddDbContext<RepositoryContext>(object =>
+            o.UseMySql(connectionString, serverVersion));
         }
     }
+
 }
