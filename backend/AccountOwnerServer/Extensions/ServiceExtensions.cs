@@ -1,5 +1,7 @@
 using Contracts;
+using entities;
 using LoggerSevice;
+using Microsoft.EntityFrameworkCore;
 
 namespace AccountOwnerServer.Extensions
 {
