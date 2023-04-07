@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AccountOwnerServer.Extensions
 {
+
     public static class ServiceExtensions
     {
         public static void ConfigureCors(this IServiceCollection services)
@@ -27,7 +28,7 @@ namespace AccountOwnerServer.Extensions
 
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
-            services.AddSingleton<ILoggerManager, LoggerManager>();
+            services.AddSingleton<ILoggerManager, LoggerManager>();           
         }
 
         public static void ConfigureMySqlContext(this IServiceCollection Services, IConfiguration config)
@@ -35,8 +36,7 @@ namespace AccountOwnerServer.Extensions
             var connectionString = config["mysqlconnection:connectionString"];
             var serverVersion = ServerVersion.AutoDetect(connectionString);
             Services.AddDbContext<RepositoryContext>(object =>
-            o.UseMySql(connectionString, serverVersion));
+                o.UseMySql(connectionString, serverVersion));
         }
     }
-
 }
