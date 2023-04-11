@@ -7,24 +7,23 @@ namespace AccountOwnerServer.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    private readonly ILoggerManager _logger;
-    private static readonly string[] Summaries = new[]
+    private IRepositoryWrapper_repository;
+    public WeatherForecastController(IRepositoryWrapper repository)
     {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
-    public WeatherForecastController(ILoggerManager logger)
-    {
-        _logger = logger;
-    }
+        _repository = repository;
+    } 
 
     [HttpGet]
     public IEnumerable<string> Get()
     {
-        _logger.LogInfo("Testado um log de informação a partir de um Contoller.");
-        _logger.LogDebug("Testado um log de debug a partir de um Controller.");
-        _logger.LogWarn("Testado um log de aviso a partir de um Controller.");
-        _logger.LogError("Testado um log de erro a partir de um Controller.");
+        var domesticAccounts = _repository.Account
+            .FindByCondition(x => x.AccountType.Equals("Domestic"));
+        var owners = _repository.Owner.FindAll();
         return new string[] { "value1", "value2" };
     }
-}
+} 
+    
+
+    
+    
+

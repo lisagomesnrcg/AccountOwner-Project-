@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 namespace Contracts;
 
-public interface IRepositoryBase
+public interface IRepositoryBase<T>
 {
     IQueryable<T> FindAll();
     IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
